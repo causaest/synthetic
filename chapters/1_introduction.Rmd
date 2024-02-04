@@ -1,15 +1,20 @@
 ---
-title: "Synthetic data"
-author: "Alexios Tamparopoulos^[tamparopoulos@gmail.com]"
-date: "`r format(Sys.time(), '%d %B %Y, %H:%M:%S')`"
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-subtitle: Concepts and techniques
+title: "Creating synthetic data with R"
+subtitle: "An introductory course"
+output: bookdown::pdf_book
+paged-footnotes: true
 ---
 
-# Preamble ---
+```{r, setup_ch01, include = FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  comment = "#>",
+  collapse = TRUE,
+  self.contained = FALSE,
+  R.options = list(width = 70))
+```
+
+# Introduction { .chapter }
 
 Initiate script
 
@@ -28,9 +33,9 @@ Load packages
 # library(ggplot2)
 ```
 
-# Sequences ---
+## Sequences ---
 
-## The `seq()` function
+### The `seq()` function
 
 The simplest data we can generate is a sequence. In an *arithmetic sequence* we have a series of numbers where the difference from any succeeding term to its preceding term remains constant. To generate such a sequence, we need to know where it starts, where it ends, and what the increment is:
 
@@ -81,19 +86,19 @@ seq(from = 0.23, to = 0.55, along.with = nms)
 seq(from = 9.1, to = 3.3, length.out = 6)
 ```
 
-## The `:` notation
+### The `:` notation
 
-## Variations of `seq()`
+### Variations of `seq()`
 
 rep (not replicate), gl
 
-# Factors
+## Factors
 
-# Distributions
+## Distributions
 
-## Common distributions
+### Common distributions
 
-### The Uniform distribution
+#### The Uniform distribution
 
 Suppose we want to generate random numbers between a minimum and a maximum value. In this case, it suffices to have a mechanism that generates random numbers between 0 and 1. The function `runif` (where "r" is for "random" and "unif" for "uniform") is doing that:
 
@@ -149,13 +154,3 @@ formatC(1:10, width = 3, format = "d", flag = "0")
 
 width = 3 creates numbers with 3 digits, format = "d" creates integers, and flag = "0" pads leading zeros.
 
-
-
-
-----------------------------------------
-
-# About
-
-----------------------------------------
-
-This is an [R Markdown](https://rmarkdown.rstudio.com) Notebook. When code is executed code the notebook, the results appear beneath the code. When the notebook is saved, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
