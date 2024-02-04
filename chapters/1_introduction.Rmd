@@ -1,0 +1,161 @@
+---
+title: "Synthetic data"
+author: "Alexios Tamparopoulos^[tamparopoulos@gmail.com]"
+date: "`r format(Sys.time(), '%d %B %Y, %H:%M:%S')`"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+subtitle: Concepts and techniques
+---
+
+# Preamble ---
+
+Initiate script
+
+```{r}
+rm(list = ls()) # clear workspace
+options(scipen = 999) # disable scientific notation
+tmst <- paste("", format(Sys.time(), "%Y-%m-%d %H:%M")) # get current timestamp
+font_fam <- names(pdfFonts())[10] # set font family
+```
+
+Load packages
+
+```{r, message = FALSE}
+# library(magrittr)
+# library(dplyr)
+# library(ggplot2)
+```
+
+# Sequences ---
+
+## The `seq()` function
+
+The simplest data we can generate is a sequence. In an *arithmetic sequence* we have a series of numbers where the difference from any succeeding term to its preceding term remains constant. To generate such a sequence, we need to know where it starts, where it ends, and what the increment is:
+
+```{r}
+seq(from = 2, to = 5, by = 0.5)
+```
+
+We can also reverse the order; in this case we need to make sure we use a negative increment:
+
+```{r}
+seq(from = 5, to = 2, by = -0.5)
+```
+
+If the direction and the increment sign are inconsistent, we will get an error:
+
+```{r, error = TRUE}
+seq(from = 2, to = 5, by = -0.5)
+```
+
+The above sequence (from = 2, to = 5, by = 0.5) has 7 numbers; we could calculate this as:
+
+```{r}
+(5 - 2)/0.5 + 1
+```
+
+Why the `+1` in the calculation? Because, in order to construct `N` intervals, we need to have `N+1` numbers. To construct a chest of 3 drawers, we need to have 4 horizontal wood sheets.
+
+Sometimes, it's important to control the length of the sequence, because the number of generated terms is definite. In that case, we can work out the math and calculate the increment. If we need 6 numbers from 3.3 to 9.1, we would have to run the following:
+
+```{r}
+seq(from = 3.3, to = 9.1, by = (9.1 - 3.3)/(6 - 1))
+```
+
+Notice the `- 1` because now we are converting the length to an increment. Since it would be quite risky to rely on manual calculations, the `seq()` function offers a direct alternative, where we can simply provide the desired length of the sequence.
+
+```{r}
+seq(from = 3.3, to = 9.1, length.out = 6)
+```
+
+Finally, there is a way to get the desired length from an existing vector in that case we replace the `length.out` with `along.with`. This will save us from calculating the length ourselves.
+
+```{r}
+nms <- c("Helen", "George", "Nick")
+seq(from = 0.23, to = 0.55, along.with = nms)
+```
+
+```{r}
+seq(from = 9.1, to = 3.3, length.out = 6)
+```
+
+## The `:` notation
+
+## Variations of `seq()`
+
+rep (not replicate), gl
+
+# Factors
+
+# Distributions
+
+## Common distributions
+
+### The Uniform distribution
+
+Suppose we want to generate random numbers between a minimum and a maximum value. In this case, it suffices to have a mechanism that generates random numbers between 0 and 1. The function `runif` (where "r" is for "random" and "unif" for "uniform") is doing that:
+
+```{r}
+x <- runif(n = 7)
+x
+```
+
+If we wanted to obtain numbers between min = 3.3 and max = 9.1, we perform the calculation:
+
+```{r}
+(9.1 - 3.3) * x + 3.3
+```
+
+Let's plot a large number of such numbers, to see their distribution:
+
+```{r}
+y <- (9.1 - 3.3) * runif(1e5) + 3.3
+hist(y, breaks = seq(3.3, 9.1, length.out = 10))
+```
+
+`runif()` saves us from having to perform the calculation, as it takes a `min` and a `max` option:
+
+```{r}
+runif(n = 7, min = 3.3, max = 9.1)
+```
+
+```{r}
+x <- (35 - 15) * rweibull(n = 20, shape = 1.5, scale = 1.0) + 10
+summary(x)
+```
+
+```{r}
+density(x)
+```
+
+```{r}
+# x*ecdf(x)
+```
+
+
+
+```{r}
+DF <- matrix(0, nrow = 20, ncol = 5)
+DF <- as.data.frame(DF)
+names(DF) <- c("ID", "Name", "Age", "Income", "BMI")
+DF
+```
+
+```{r}
+formatC(1:10, width = 3, format = "d", flag = "0")
+```
+
+width = 3 creates numbers with 3 digits, format = "d" creates integers, and flag = "0" pads leading zeros.
+
+
+
+
+----------------------------------------
+
+# About
+
+----------------------------------------
+
+This is an [R Markdown](https://rmarkdown.rstudio.com) Notebook. When code is executed code the notebook, the results appear beneath the code. When the notebook is saved, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
